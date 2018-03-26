@@ -1,7 +1,7 @@
 Package: BoltzMM
 Type: Package
 Title: Boltzmann Machines with MM Algorithms
-Version: 0.1.0
+Version: 0.1.1
 Author: Andrew Thomas Jones, Hien Duy Ngyuen
 Maintainer: Andrew Thomas Jones <andrewthomasjones@gmail.com>
 Description: Provides probability computation, data generation,
@@ -12,9 +12,9 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 LinkingTo: Rcpp, RcppArmadillo, BH
-Imports: Rcpp, stats
+Imports: Rcpp
 RoxygenNote: 6.0.1
 NeedsCompilation: yes
-Packaged: 2018-03-19 09:55:38 UTC; uqajon14
+Packaged: 2018-03-26 06:21:39 UTC; uqajon14
 Repository: CRAN
-Date/Publication: 2018-03-19 14:55:30 UTC
+Date/Publication: 2018-03-26 06:31:03 UTC
