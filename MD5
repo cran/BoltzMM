@@ -1,9 +1,9 @@
-70b5f7aaa170911be5f2a7e1ee0b429e *DESCRIPTION
+f006c4788d5917b2befaf65bffba2f85 *DESCRIPTION
 92f96f1cac60dce68b081bc1ebc47365 *NAMESPACE
-b92c34d4edef93ac4d582781399da791 *NEWS.md
+df7bed5a6d67c12b6e89eeaa9075ebeb *NEWS.md
 1dfa16aae3c9ffc51f743518308b8466 *R/BoltzMM.R
 87dc5b5ca0ad7c43ec115858cc70066e *R/RcppExports.R
-25a602868189b3130fe5ab9b7258addb *README.md
+0b557d3c59ba0b7a6baacbe11d4f9529 *README.md
 e8594428dc112b3b1aea6bb66b4d4ecc *data/senate.rda
 3df3ddb20ddff264d8d1726d37f01903 *man/BoltzMM.Rd
 c94356420ec3877c4c67800a1faf99c5 *man/allpfvbm.Rd
@@ -22,12 +22,5 @@ ef3e453743acd8ecad7120f39cb3e9f0 *src/Makevars
 ec965e0b76f3e162764d8b27a0def6bf *src/Makevars.win
 ab56b5a362637c27f3e512a4393a78f8 *src/RcppExports.cpp
 4cebcccbcdf24351c7d997cc421cebd2 *tests/testthat.R
-f2a06f69de19b2ced448b7fd44ea11e5 *tests/testthat/ffitfvbm
-829f34e5278b69a1842d73855ae6aa51 *tests/testthat/fvbmHess
-db8df0ca07d40d56a3dbd3d4c30cb9a9 *tests/testthat/fvbmcov
-b9701755ebe3ae346967ec79cf34fcb3 *tests/testthat/fvbmpartiald
-7ba2bc0de5349863c8c057bcdb51bab7 *tests/testthat/fvbmstderr
-3231b1a582440b7ee4d6712435c49445 *tests/testthat/fvbmtests
-befcfe792cb3195b03e39077a39485a4 *tests/testthat/marginpfvbm
-6afc2177ac55c7d2add9f9220446b24c *tests/testthat/test-cpp.R
-df6d13058818b6d27186b821fb9a091d *tests/testthat/test-rfunct.R
+bfb7dbe1a221ba161655b0aa550375da *tests/testthat/test-cpp.R
+ee986b8be927da2d8005043036edece8 *tests/testthat/test-rfunct.R

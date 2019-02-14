@@ -4,18 +4,20 @@
 mirror](http://cranlogs.r-pkg.org/badges/BoltzMM)](https://CRAN.R-project.org/package=BoltzMM)
 [![Build
 Status](https://travis-ci.org/andrewthomasjones/BoltzMM.svg?branch=master)](https://travis-ci.org/andrewthomasjones/BoltzMM)
+[![status](http://joss.theoj.org/papers/23eb189a5e0bdd2b51f668621abcc75a/status.svg)](http://joss.theoj.org/papers/23eb189a5e0bdd2b51f668621abcc75a)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # BoltzMM
 
 The BoltzMM package allows for computation of probability mass functions
-of fully-visible Boltzmann machines via `pfvbm` and `allpfvbm`. Random
-data can be generated using `rfvbm`. Maximum pseudolikelihood estimation
-of parameters via the MM algorithm can be conducted using `fitfvbm`.
-Computation of partial derivatives and Hessians can be performed via
-`fvbmpartiald` and `fvbmHessian`. Covariance estimation and normal
-standard errors can be computed using `fvbmcov` and `fvbmstderr`.
+of fully-visible Boltzmann machines (FVBMs) via `pfvbm` and `allpfvbm`.
+Random data can be generated using `rfvbm`. Maximum pseudolikelihood
+estimation of parameters via the MM algorithm can be conducted using
+`fitfvbm`. Computation of partial derivatives and Hessians can be
+performed via `fvbmpartiald` and `fvbmHessian`. Covariance estimation
+and normal standard errors can be computed using `fvbmcov` and
+`fvbmstderr`.
 
 ## Installation
 
@@ -24,7 +26,7 @@ If `devtools` has already been installed, then the most current build of
 command:
 
 ``` r
-devtools::install_github('andrewthomasjones/BoltzMM',build_vignettes = T)
+devtools::install_github('andrewthomasjones/BoltzMM',build_vignettes = TRUE)
 ```
 
 The latest stable build of `BoltzMM` can be obtain from CRAN via the
@@ -35,9 +37,9 @@ install.packages("BoltzMM", repos='http://cran.us.r-project.org')
 ```
 
 An archival build of `BoltzMM` is available at
-<https://zenodo.org/record/1317784>. Manual installation instructions
-can be found within the *R* installation and administration manual
-<https://cran.r-project.org/doc/manuals/r-release/R-admin.html>.
+<http://doi.org/10.5281/zenodo.2538256>. Manual installation
+instructions can be found within the *R* installation and administration
+manual <https://cran.r-project.org/doc/manuals/r-release/R-admin.html>.
 
 ## Examples
 
@@ -126,20 +128,20 @@ library(bnstruct)
 #>     union
 library(BoltzMM)
 
-#load data
+# Load data
 data(senate)
 
 # Turn data into a matrix
 senate_data <- as.matrix(senate)
 
-#recode Yes as 1, and No as -1
-senate_data[senate_data=="Yes"]<-1
-senate_data[senate_data=="No"]<--1
+# Recode Yes as 1, and No as -1
+senate_data[senate=="Yes"] <- 1
+senate_data[senate=="No"] <- -1
 
-# Conduct imputation for missing data
-imp_data <- knn.impute(senate_data,k=1)
-#> Warning in storage.mode(use.data) <- "double": NAs introduced by coercion
-#> Warning in storage.mode(imp.data) <- "double": NAs introduced by coercion
+# Conduct imputation
+imp_data <- knn.impute(suppressWarnings(matrix(as.numeric(senate_data),
+                                        dim(senate_data))),
+                       k=1)
 
 # No governement - using as reference level
 data_nogov <- imp_data[,-1]
@@ -170,12 +172,12 @@ test_results
 #> 
 #> $Mmat_z
 #>            [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
-#> [1,]        NaN -0.6596632 -1.3152156 -2.0181850  0.1936413  3.8587216
-#> [2,] -0.6596632        NaN -0.9536614 -2.0795939 -0.4947831  6.1625534
-#> [3,] -1.3152156 -0.9536614        NaN  1.3258059 -1.0861345  2.6332797
-#> [4,] -2.0181850 -2.0795939  1.3258059        NaN  3.0115924  0.4798541
-#> [5,]  0.1936413 -0.4947831 -1.0861345  3.0115924        NaN -1.2899547
-#> [6,]  3.8587216  6.1625534  2.6332797  0.4798541 -1.2899547        NaN
+#> [1,]         NA -0.6596632 -1.3152156 -2.0181850  0.1936413  3.8587216
+#> [2,] -0.6596632         NA -0.9536614 -2.0795939 -0.4947831  6.1625534
+#> [3,] -1.3152156 -0.9536614         NA  1.3258059 -1.0861345  2.6332797
+#> [4,] -2.0181850 -2.0795939  1.3258059         NA  3.0115924  0.4798541
+#> [5,]  0.1936413 -0.4947831 -1.0861345  3.0115924         NA -1.2899547
+#> [6,]  3.8587216  6.1625534  2.6332797  0.4798541 -1.2899547         NA
 #> [7,]  0.5671620  0.5877623  5.8430378 -0.9769979  1.5757127 -1.0129338
 #> [8,]  0.3126387 -3.4715041 -0.9287578  4.0101249  0.7587521  2.3224311
 #>            [,7]       [,8]
@@ -185,16 +187,16 @@ test_results
 #> [4,] -0.9769979  4.0101249
 #> [5,]  1.5757127  0.7587521
 #> [6,] -1.0129338  2.3224311
-#> [7,]        NaN  2.2571849
-#> [8,]  2.2571849        NaN
+#> [7,]         NA  2.2571849
+#> [8,]  2.2571849         NA
 #> 
 #> $Mmat_p
 #>              [,1]         [,2]         [,3]         [,4]        [,5]
-#> [1,]          NaN 5.094700e-01 1.884374e-01 4.357200e-02 0.846456748
-#> [2,] 0.5094699872          NaN 3.402551e-01 3.756280e-02 0.620753227
-#> [3,] 0.1884374472 3.402551e-01          NaN 1.849040e-01 0.277419500
-#> [4,] 0.0435719956 3.756280e-02 1.849040e-01          NaN 0.002598813
-#> [5,] 0.8464567475 6.207532e-01 2.774195e-01 2.598813e-03         NaN
+#> [1,]           NA 5.094700e-01 1.884374e-01 4.357200e-02 0.846456748
+#> [2,] 0.5094699872           NA 3.402551e-01 3.756280e-02 0.620753227
+#> [3,] 0.1884374472 3.402551e-01           NA 1.849040e-01 0.277419500
+#> [4,] 0.0435719956 3.756280e-02 1.849040e-01           NA 0.002598813
+#> [5,] 0.8464567475 6.207532e-01 2.774195e-01 2.598813e-03          NA
 #> [6,] 0.0001139817 7.158116e-10 8.456467e-03 6.313312e-01 0.197066396
 #> [7,] 0.5706041434 5.566918e-01 5.125738e-09 3.285702e-01 0.115092039
 #> [8,] 0.7545551426 5.175514e-04 3.530146e-01 6.068665e-05 0.448000891
@@ -204,32 +206,81 @@ test_results
 #> [3,] 8.456467e-03 5.125738e-09 3.530146e-01
 #> [4,] 6.313312e-01 3.285702e-01 6.068665e-05
 #> [5,] 1.970664e-01 1.150920e-01 4.480009e-01
-#> [6,]          NaN 3.110918e-01 2.020973e-02
-#> [7,] 3.110918e-01          NaN 2.399652e-02
-#> [8,] 2.020973e-02 2.399652e-02          NaN
+#> [6,]           NA 3.110918e-01 2.020973e-02
+#> [7,] 3.110918e-01           NA 2.399652e-02
+#> [8,] 2.020973e-02 2.399652e-02           NA
 ```
 
-For more examples see individual help files.
+For more examples, see individual help files.
+
+## Technical references
+
+Please refer to the following sources regarding various facets of the
+FVBM models that are implemented in the package.
+
+The FVBM model and the consistency of their maximum pseudolikelihood
+estimators (MPLEs) was first considered in
+<http://doi.org/10.1162/neco.2006.18.10.2283>. The MM algorithm
+implemented in the main function `fitfvbm` was introduced in
+<http://doi.org/10.1162/NECO_a_00813>. Here various convergence results
+regarding the algorithm is proved. Next, the asymptotic normality
+results pertaining to the use of the functions `fvbmstderr` and
+`fvbmtests` are proved in <http://doi.org/10.1109/TNNLS.2015.2425898>.
+Finally, the `senate` data was introduced and analysed in
+<https://hal.archives-ouvertes.fr/hal-01927188v1>.
+
+## Reference to package
+
+If you find this package useful in your work, then please follow the
+usual `R` instructions for citing the package in your publications. That
+is, follow the instructions from `citation('BoltzMM')`.
+
+``` r
+# Citation instructions
+citation('BoltzMM')
+#> Warning in citation("BoltzMM"): no date field in DESCRIPTION file of
+#> package 'BoltzMM'
+#> Warning in citation("BoltzMM"): could not determine year for 'BoltzMM' from
+#> package DESCRIPTION file
+#> 
+#> To cite package 'BoltzMM' in publications use:
+#> 
+#>   Andrew Thomas Jones, Hien Duy Nguyen and Jessica Juanita Bagnall
+#>   (NA). BoltzMM: Boltzmann Machines with MM Algorithms. R package
+#>   version 0.1.3.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {BoltzMM: Boltzmann Machines with MM Algorithms},
+#>     author = {Andrew Thomas Jones and Hien Duy Nguyen and Jessica Juanita Bagnall},
+#>     note = {R package version 0.1.3},
+#>   }
+#> 
+#> ATTENTION: This citation information has been auto-generated from
+#> the package DESCRIPTION file and may need manual editing, see
+#> 'help("citation")'.
+```
+
+## Authorship statement
+
+The `BoltzMM` package is co-authored by [Andrew T.
+Jones](https://github.com/andrewthomasjones), [Hien D.
+Nguyen](https://github.com/hiendn), and Jessica J. Bagnall. The initial
+development of the package, in native `R` was conducted by HDN.
+Implementation of the core loops of the package in the `C` language was
+performed by ATJ. JJB formatted and contributed the `senate` data set as
+well as the example analysis on the `senate` data. All three co-authors
+contributed to the documentation of the software as well as
+troubleshooting and testing.
 
 ## Unit testing
 
 Using the package `testthat`, we have conducted the following unit test
-for the GitHub build, on the date: 05 January, 2019. The testing files
+for the GitHub build, on the date: 31 January, 2019. The testing files
 are contained in the
 [tests](https://github.com/andrewthomasjones/BoltzMM/tree/master/tests)
-folder of the respository.
-
-``` r
-
-## Load 'BoltzMM' library.
-library(BoltzMM)
-  
-## Load 'testthat' library.
-library(testthat)
-
-## Test 'BoltzMM'
-test_package("BoltzMM")
-```
+folder of the repository.
 
 ## Bug reporting and contributions
 

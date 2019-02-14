@@ -1,5 +1,6 @@
 context("Check Exported C++ Functions")
 library(BoltzMM)
+tol_C<-1.0e-3
 
 test_that("Test fitfvbm ", {
   bvec<-c(0,0.5,0.25)
@@ -10,8 +11,19 @@ test_that("Test fitfvbm ", {
 
   tmp2 <- "./ffitfvbm"
 
+  expect_is(fitfvbmResult, "list")
+  expect_is(fitfvbmResult[[1]], "numeric")
+  expect_is(fitfvbmResult[[2]], "numeric")
+  expect_is(fitfvbmResult[[3]], "matrix")
+  expect_is(fitfvbmResult[[4]], "integer")
+  expect_equal(length(fitfvbmResult), 4)
+  expect_equal(length(fitfvbmResult[[1]]), 1)
+  expect_equal(length(fitfvbmResult[[2]]), 3)
+  expect_equal(dim(fitfvbmResult[[3]]), c(3,3))
+  expect_equal(length(fitfvbmResult[[4]]), 1)
+
   # The first run always succeeds, but warns
-  expect_known_output(fitfvbmResult, tmp2, print = TRUE)
+  ##expect_known_output(fitfvbmResult, tmp2, tolerance=tol_C, print = TRUE, update=FALSE)
 
 })
 
@@ -20,13 +32,21 @@ test_that("Test pfvbm", {
   xval1 <- c(-1,1,-1)
   xval2 <- c(1,1,1)
   xval3 <- c(-1,-1,-1)
+  xval4 <- c(0,-1,-1)
+  xval5 <- c(NA,-1,-1)
+  xval6 <- c(NA,0,NA)
+  xval7 <- c(-1,1)
 
   bvec <- c(0,0.5,0.25)
   Mmat <- matrix(0.1,3,3) - diag(0.1,3,3)
 
-  expect_equal(pfvbm(xval1,bvec,Mmat), 0.1213876, tolerance = 1.0e-07)
-  expect_equal(pfvbm(xval2,bvec,Mmat), 0.2985652, tolerance = 1.0e-07)
-  expect_equal(pfvbm(xval3,bvec,Mmat), 0.0666189, tolerance = 1.0e-07)
+  expect_equal(pfvbm(xval1,bvec,Mmat), 0.1213876, tolerance=tol_C )
+  expect_equal(pfvbm(xval2,bvec,Mmat), 0.2985652, tolerance=tol_C )
+  expect_equal(pfvbm(xval3,bvec,Mmat), 0.0666189, tolerance=tol_C )
+  expect_equal(pfvbm(xval4,bvec,Mmat), 0.05454294, tolerance=tol_C )
+  expect_true(is.na(pfvbm(xval5,bvec,Mmat)))
+  expect_true(is.na(pfvbm(xval6,bvec,Mmat)))
+  expect_equal(pfvbm(xval7,bvec,Mmat), 0)
 
 })
 
@@ -44,8 +64,13 @@ test_that("Test fvbmpartiald", {
   fvbmpartialdResult<-fvbmpartiald(data, model)
   tmp2 <- "./fvbmpartiald"
 
-  # The first run always succeeds, but warns
-  expect_known_output(fvbmpartialdResult, tmp2, print = TRUE)
+  expect_is(fvbmpartialdResult, "list")
+  expect_is(fvbmpartialdResult[[1]], "numeric")
+  expect_is(fvbmpartialdResult[[2]], "matrix")
+  expect_equal(length(fvbmpartialdResult), 2)
+  expect_equal(length(fvbmpartialdResult[[1]]), 3)
+  expect_equal(dim(fvbmpartialdResult[[2]]), c(3,3))
+  ##expect_known_output(fvbmpartialdResult, tmp2,tolerance=tol_C, print = TRUE, update=FALSE)
 
 })
 
@@ -58,8 +83,11 @@ test_that(" Test allpfvbm", {
           0.07362527, 0.07362527, 0.2001342,
           0.2985652), nrow=1)
 
+  bvec2 <- c(0,0.5)
 
-  expect_equal(allpfvbm(bvec,Mmat), res1, tolerance = 1.0e-07)
+  expect_length(allpfvbm(bvec,Mmat), 8)
+  expect_equal(allpfvbm(bvec,Mmat), res1,tolerance=tol_C)
+  expect_equal(allpfvbm(bvec2,Mmat),matrix(c(0,0,0,0),1,4))
 
 })
 
@@ -77,7 +105,9 @@ test_that("Test fvbmcov", {
   tmp2 <- "./fvbmcov"
 
   # The first run alwafvbmcovs succeeds, but warns
-  expect_known_output(fvbmcovResult, tmp2, print = TRUE)
+  expect_is(fvbmcovResult, "matrix")
+  expect_equal(dim(fvbmcovResult), c(6,6))
+  #expect_known_output(fvbmcovResult, tmp2, tolerance=tol_C, print = TRUE)
 
 })
 
@@ -91,6 +121,6 @@ test_that("Test fvbmcov", {
 #   tmp2 <- "./rfvbm"
 #
 #   # The first run alwarfvbms succeeds, but warns
-#   expect_known_output(rfvbmResult, tmp2, print = TRUE)
+#   #expect_known_output(rfvbmResult, tmp2, print = TRUE)
 #
 # })
