@@ -10,7 +10,6 @@
 #'
 #' H.D. Nguyen and I.A. Wood (2016), A block successive lower-bound maximization algorithm for the maximum pseudolikelihood estimation of fully visible Boltzmann machines, Neural Computation, vol 28, pp. 485-492.
 #'
-#'@docType package
 #'@name BoltzMM
 NULL
 
@@ -190,9 +189,9 @@ marginpfvbm <- function(bvec, Mmat) {
 #'
 #'Each row represents a division(vote), each column is a party or independent.
 #'Data is either "Yes" or "No" depending on the vote. Absences and abstentions are left as NA.
-#'See \url{https://hal.archives-ouvertes.fr/hal-01927188v1} for details of data preparation.
+#'See \url{https://hal.science/hal-01927188v1} for details of data preparation.
 #'
-#'@source \url{www.aph.gov.au/Parliamentary_Business/Statistics/Senate_StatsNet/General/divisions}
+#'@source \url{https://www.aph.gov.au/Parliamentary_Business/Statistics/Senate_StatsNet#/divisions}
 #'@docType data
 #'@keywords datasets
 #'@name senate
@@ -202,5 +201,5 @@ marginpfvbm <- function(bvec, Mmat) {
 #'@examples
 #'dim(senate)
 NULL
-
+"_PACKAGE"
 

@@ -1,9 +1,17 @@
 Package: BoltzMM
 Type: Package
 Title: Boltzmann Machines with MM Algorithms
-Version: 0.1.4
-Author: Andrew Thomas Jones, Hien Duy Nguyen, and Jessica Juanita Bagnall 
-Maintainer: Andrew Thomas Jones <andrewthomasjones@gmail.com>
+Version: 0.1.5
+Authors@R: c(person(given = c("Andrew", "Thomas"),
+                      family = "Jones",
+                      role = c("aut", "cre"),
+                      email = "andrewthomasjones@gmail.com"),
+               person(given = c("Hien", "Duy"),
+                      family = "Nguyen",
+                      role = "aut"),
+               person(given = c("Jessica", "Juanita"),
+                      family = "Bagnall",
+                      role = "aut"))
 Description: Provides probability computation, data generation,
     and model estimation for fully-visible Boltzmann machines. It follows the methods
     described in Nguyen and Wood (2016a) <doi:10.1162/NECO_a_00813> 
@@ -14,9 +22,13 @@ LazyData: true
 LinkingTo: Rcpp, RcppArmadillo, BH
 Imports: Rcpp
 Depends: R (>= 2.10)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.3.2
 Suggests: testthat, knitr, rmarkdown, bnstruct
 NeedsCompilation: yes
-Packaged: 2019-02-14 08:55:53 UTC; andrewjones
+Packaged: 2025-04-13 08:51:16 UTC; uqajon14
+Author: Andrew Thomas Jones [aut, cre],
+  Hien Duy Nguyen [aut],
+  Jessica Juanita Bagnall [aut]
+Maintainer: Andrew Thomas Jones <andrewthomasjones@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-02-14 09:10:03 UTC
+Date/Publication: 2025-04-13 09:10:02 UTC
